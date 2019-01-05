@@ -2,14 +2,28 @@
 <html>
 <head>
   <title>Robinshood</title>
-
-  <!-- CSS stylesheets for Line Graph Component -->
-  <link href='http://localhost:3456/styles.css' rel='stylesheet'>
-  <link href='http://localhost:3456/odometer-theme-default.css' rel='stylesheet'>
-  <!-- CSS stylesheets for About and News Component -->
-  <link href='http://localhost:8080/styles.css' rel='stylesheet'>
-  <link href='/styles.css' rel='stylesheet'>
   
+	<!-- Dynamically load stylesheets depending on whether app is run locally or not -->
+	<script>
+      var localStylesheets;
+      var publicStylesheets = ['http://d19drlh3b7ouuu.cloudfront.net/styles.css', 'http://d19drlh3b7ouuu.cloudfront.net/odometer-theme-default.css'];
+      // If localStylesheets are defined, app will localStylesheets, else it will use publicStylesheets
+      localStylesheets = {
+        lineGraphMain: 'http://localhost:3456/styles.css',
+        lineGraphOdometer: 'http://localhost:3456/odometer-theme-default.css',
+        aboutAndNews: 'http://localhost:8080/styles.css',
+        proxy: '/styles.css'
+      };
+      var stylesheets = localStylesheets ? localStylesheets : publicStylesheets;
+      for (var sheet in localStylesheets) {
+        var link = document.createElement("link");
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.href = localStylesheets[sheet];
+        document.head.appendChild(link);
+      };
+    </script>
+
 </head>
 <body>
   <div id='lineGraph'>Line Graph Component should render here.</div>
