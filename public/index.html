@@ -6,20 +6,25 @@
 	<!-- Dynamically load stylesheets depending on whether app is run locally or not -->
 	<script>
       var localStylesheets;
-      var publicStylesheets = ['http://d19drlh3b7ouuu.cloudfront.net/styles.css', 'http://d19drlh3b7ouuu.cloudfront.net/odometer-theme-default.css'];
-      // If localStylesheets are defined, app will localStylesheets, else it will use publicStylesheets
-      localStylesheets = {
-        lineGraphMain: 'http://localhost:3456/styles.css',
-        lineGraphOdometer: 'http://localhost:3456/odometer-theme-default.css',
-        aboutAndNews: 'http://localhost:8080/styles.css',
+      var publicStylesheets = {
+        lineGraphMain: 'http://d19drlh3b7ouuu.cloudfront.net/styles.css',
+        lineGraphOdometer: 'http://d19drlh3b7ouuu.cloudfront.net/odometer-theme-default.css',
+        aboutAndNews: 'http://fecmorgan-env-1.nwc3hnppvt.us-east-1.elasticbeanstalk.com/styles.css',
         proxy: '/styles.css'
       };
+      // If localStylesheets are defined, app will localStylesheets, else it will use publicStylesheets
+      // localStylesheets = {
+      //   lineGraphMain: 'http://localhost:3456/styles.css',
+      //   lineGraphOdometer: 'http://localhost:3456/odometer-theme-default.css',
+      //   aboutAndNews: 'http://localhost:8080/styles.css',
+      //   proxy: '/styles.css'
+      // };
       var stylesheets = localStylesheets ? localStylesheets : publicStylesheets;
-      for (var sheet in localStylesheets) {
+      for (var sheet in stylesheets) {
         var link = document.createElement("link");
         link.type = 'text/css';
         link.rel = 'stylesheet';
-        link.href = localStylesheets[sheet];
+        link.href = stylesheets[sheet];
         document.head.appendChild(link);
       };
     </script>
@@ -32,8 +37,8 @@
 
   <!-- Load React. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>  
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>  
   
   <script src="/aboutAndNews.js"></script>
   <script src="/buySell.js"></script>
